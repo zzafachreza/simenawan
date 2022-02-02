@@ -10,8 +10,6 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "react": "16.13.1",
-    "react-native": "0.63.4",
     "@react-native-async-storage/async-storage": "^1.13.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-picker/picker": "^1.16.8",
@@ -19,6 +17,9 @@
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
     "axios": "^0.21.4",
+    "intl": "^1.2.5",
+    "react": "16.13.1",
+    "react-native": "0.63.4",
     "react-native-animated-pagination-dots": "^0.1.72",
     "react-native-countup": "0.0.2",
     "react-native-elements": "^3.0.0-alpha.1",

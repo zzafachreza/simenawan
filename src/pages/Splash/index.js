@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,9 +7,10 @@ import {
   Image,
   Animated,
 } from 'react-native';
-import {colors} from '../../utils';
+import { colors } from '../../utils';
+import { getData } from '../../utils/localStorage';
 
-export default function Splash({navigation}) {
+export default function Splash({ navigation }) {
   const top = new Animated.Value(0.3);
 
   const animasi = () => {
@@ -30,12 +31,30 @@ export default function Splash({navigation}) {
     ).start();
   };
 
+
+
   useEffect(() => {
-    animasi();
-    setTimeout(() => {
-      navigation.replace('Login');
-    }, 2000);
+
+
+    const unsubscribe = getData('user').then(res => {
+      // console.log(res);
+      if (!res) {
+        // console.log('beum login');
+
+        setTimeout(() => {
+          navigation.replace('Login');
+        }, 1500);
+      } else {
+        console.log('sudah login logon');
+
+        setTimeout(() => {
+          navigation.replace('Home');
+        }, 1500);
+      }
+    });
   }, []);
+
+
   return (
     <View
       style={{
@@ -52,7 +71,7 @@ export default function Splash({navigation}) {
             height: 220,
           },
           {
-            transform: [{scale: top}],
+            transform: [{ scale: top }],
           })
         }
       />
