@@ -58,6 +58,7 @@ export default function Home({ navigation }) {
   const [user, setUser] = useState({});
 
 
+
   useEffect(() => {
 
     getData('user').then(res => {
@@ -65,6 +66,25 @@ export default function Home({ navigation }) {
     })
 
   })
+
+
+
+
+  const IndonesiaTgl = (tgl) => {
+
+    var bulan = [
+      "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+      "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+
+    var _tanggal = new Date(tgl).getDate();
+    var _bulan = new Date(tgl).getMonth();
+    var _tahun = new Date(tgl).getFullYear();
+
+
+    return `${_tanggal} ${bulan[_bulan]} ${_tahun}`
+  }
+
 
   const MyTable = ({ label, value }) => {
     return (
@@ -130,7 +150,7 @@ export default function Home({ navigation }) {
           {/* section 2 */}
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: windowWidth / 4, backgroundColor: colors.primary }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Cegah1')} style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuOrangTua')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
                 <Image source={require('../../assets/logo.png')} style={{
                   width: 40,
@@ -147,7 +167,7 @@ export default function Home({ navigation }) {
                 Orang Tua
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Cegah2')} style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuPasutri')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
                 <Image source={require('../../assets/logo.png')} style={{
                   width: 40,
@@ -164,7 +184,7 @@ export default function Home({ navigation }) {
                 Suami / Istri
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Cegah3')} style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuAnak')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
                 <Image source={require('../../assets/logo.png')} style={{
                   width: 40,
@@ -184,7 +204,7 @@ export default function Home({ navigation }) {
           </View>
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: windowWidth / 4, backgroundColor: colors.primary }}>
-            <TouchableOpacity onPress={() => navigation.navigate('Cegah1')} style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuPendidikan')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
                 <Image source={require('../../assets/logo.png')} style={{
                   width: 40,
@@ -201,7 +221,7 @@ export default function Home({ navigation }) {
                 Pendidikan
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Cegah2')} style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuPengalaman')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
                 <Image source={require('../../assets/logo.png')} style={{
                   width: 40,
@@ -218,7 +238,7 @@ export default function Home({ navigation }) {
                 Pengalaman Kerja
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Cegah3')} style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => navigation.navigate('MenuPelatihan')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
                 <Image source={require('../../assets/logo.png')} style={{
                   width: 40,
@@ -248,10 +268,10 @@ export default function Home({ navigation }) {
           <MyTable label="BP Jamsostek" value={user.nokakes} />
           <MyTable label="NPWP" value={user.npwp} />
           <MyTable label="ID Resmi" value={user.idresmi} />
-          <MyTable label="Jenis Kelamin" value={user.jk} />
+          <MyTable label="Jenis Kelamin" value={user.jk == "P" ? "Perempuan" : "Laki-laki"} />
           <MyTable label="Jabatan" value={user.jab} />
           <MyTable label="Bagian" value={user.dept} />
-          <MyTable label="Tempat Tanggal Lahir" value={user.tmp_lahir} />
+          <MyTable label="Tempat Tanggal Lahir" value={`${user.tmp_lahir}, ${IndonesiaTgl(user.tgl_lahir)}`} />
           <MyTable label="Umur" value={user.nik} />
           <MyTable label="Golongan Darah" value={user.gol_darah} />
           <MyTable label="Agama" value={user.agama} />
@@ -284,7 +304,7 @@ export default function Home({ navigation }) {
 
 
 
-        <TouchableOpacity onPress={() => navigation.navigate('Cegah4')} style={{ width: 80, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => navigation.navigate('MenuProfileEdit')} style={{ width: 80, justifyContent: 'center', alignItems: 'center' }}>
           <Icon type="ionicon" name="person" color={colors.tertiary} />
           <Text style={{
             fontFamily: fonts.secondary[400],
