@@ -26,7 +26,7 @@ export default function Splash({ navigation }) {
         }),
       ]),
       {
-        iterations: 20,
+        iterations: 1,
       },
     ).start();
   };
@@ -34,7 +34,7 @@ export default function Splash({ navigation }) {
 
 
   useEffect(() => {
-
+    animasi();
 
     const unsubscribe = getData('user').then(res => {
       // console.log(res);

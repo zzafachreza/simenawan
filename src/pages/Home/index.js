@@ -310,7 +310,7 @@ export default function Home({ navigation }) {
             fontFamily: fonts.secondary[400],
             fontSize: windowWidth / 35,
             color: colors.black
-          }}>Update Profile</Text>
+          }}>Profile</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
 
@@ -325,7 +325,12 @@ export default function Home({ navigation }) {
               },
               {
                 text: "OK", onPress: () => {
-                  storeData('user', null);
+                  storeData('user', {
+                    nik: null,
+                    password: null
+                  });
+
+
 
                   navigation.replace('Login');
                 }

@@ -5,6 +5,7 @@ import DatePicker from 'react-native-date-picker';
 import { colors, fonts } from '../../utils';
 import axios from 'axios';
 import { getData, storeData } from '../../utils/localStorage';
+import { Picker } from '@react-native-picker/picker';
 
 export default function ({ navigation, route }) {
 
@@ -18,7 +19,7 @@ export default function ({ navigation, route }) {
 
     const _kirimAPI = () => {
 
-        setLoading(true)
+        setLoading(true);
         console.error(kirim);
 
         axios.post('https://simenawan.mpssukorejo.com/api/profile_update.php', kirim).then(res => {
@@ -79,12 +80,30 @@ export default function ({ navigation, route }) {
                     npwp: val
                 })} />
 
-                <MyInput label="jk" value={kirim.jk} onChangeText={val => setKirim({
-                    ...kirim,
-                    jk: val
-                })} />
 
-                <MyInput label="jab" value={kirim.jab} onChangeText={val => setKirim({
+
+
+
+
+                <Text style={{
+                    marginTop: 10,
+                    left: 10,
+                    fontFamily: fonts.secondary[600],
+                    color: colors.primary,
+                    fontSize: 16,
+
+                }}>Jenis Kelamin</Text>
+                <Picker
+                    selectedValue={kirim.jk}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setKirim({ ...kirim, jk: itemValue })
+                    }>
+                    <Picker.Item label="Laki-Laki" value="L" />
+                    <Picker.Item label="Perempuan" value="P" />
+                </Picker>
+
+
+                <MyInput label="Jabatan" value={kirim.jab} onChangeText={val => setKirim({
                     ...kirim,
                     jab: val
                 })} />
@@ -94,7 +113,7 @@ export default function ({ navigation, route }) {
                     dept: val
                 })} />
 
-                <MyInput label="tmp_lahir" value={kirim.tmp_lahir} onChangeText={val => setKirim({
+                <MyInput label="Tempat Lahir" value={kirim.tmp_lahir} onChangeText={val => setKirim({
                     ...kirim,
                     tmp_lahir: val
                 })} />
@@ -110,7 +129,7 @@ export default function ({ navigation, route }) {
                     tgl_lahir: val
                 })} />
 
-                <MyInput label="gol_darah" value={kirim.gol_darah} onChangeText={val => setKirim({
+                <MyInput label="Golongan Darah" value={kirim.gol_darah} onChangeText={val => setKirim({
                     ...kirim,
                     gol_darah: val
                 })} />
@@ -121,12 +140,12 @@ export default function ({ navigation, route }) {
                 })} />
 
 
-                <MyInput label="telp" value={kirim.telp} onChangeText={val => setKirim({
+                <MyInput label="Telepon" value={kirim.telp} onChangeText={val => setKirim({
                     ...kirim,
                     telp: val
                 })} />
 
-                <MyInput label="email" value={kirim.email} onChangeText={val => setKirim({
+                <MyInput label="Email" value={kirim.email} onChangeText={val => setKirim({
                     ...kirim,
                     email: val
                 })} />
@@ -136,12 +155,12 @@ export default function ({ navigation, route }) {
                     alamat: val
                 })} />
 
-                <MyInput label="gaji" value={kirim.gaji} onChangeText={val => setKirim({
+                <MyInput label="Gaji" value={kirim.gaji} onChangeText={val => setKirim({
                     ...kirim,
                     gaji: val
                 })} />
 
-                <MyInput label="newpassword" value={kirim.newpassword} onChangeText={val => setKirim({
+                <MyInput label="Password Jika Akan diganti" value={kirim.newpassword} onChangeText={val => setKirim({
                     ...kirim,
                     newpassword: val
                 })} />
