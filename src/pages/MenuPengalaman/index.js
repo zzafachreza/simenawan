@@ -157,7 +157,7 @@ export default function ({ navigation }) {
                                 fontSize: windowWidth / 25,
                                 color: colors.black,
 
-                            }}>{item.tgl_masuk}</Text>
+                            }}>{IndonesiaTgl(item.tgl_masuk)}</Text>
 
                             <Text style={{
                                 fontFamily: fonts.secondary[600],
@@ -170,7 +170,7 @@ export default function ({ navigation }) {
                                 fontSize: windowWidth / 25,
                                 color: colors.black,
 
-                            }}>{item.tgl_keluar}</Text>
+                            }}>{IndonesiaTgl(item.tgl_keluar)}</Text>
                         </View>
                     )
                 })}

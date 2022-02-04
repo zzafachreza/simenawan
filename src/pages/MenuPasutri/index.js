@@ -120,7 +120,7 @@ export default function ({ navigation }) {
                                 fontSize: windowWidth / 25,
                                 color: colors.black,
 
-                            }}>{item.tmp_lahir}, {item.tgl_lahir}</Text>
+                            }}>{item.tmp_lahir}, {IndonesiaTgl(item.tgl_lahir)}</Text>
                             <Text style={{
                                 fontFamily: fonts.secondary[600],
                                 fontSize: windowWidth / 25,

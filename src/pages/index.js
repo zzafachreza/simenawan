@@ -13,6 +13,8 @@ import MenuPengalaman from './MenuPengalaman';
 import MenuPengalamanEdit from './MenuPengalamanEdit';
 import MenuPelatihan from './MenuPelatihan';
 import MenuPelatihanEdit from './MenuPelatihanEdit';
+import MenuProfileEdit from './MenuProfileEdit';
+
 
 
 
@@ -31,5 +33,6 @@ export {
   MenuAnakEdit,
   MenuAnak,
   MenuPasutriEdit,
-  MenuPasutri
+  MenuPasutri,
+  MenuProfileEdit
 };

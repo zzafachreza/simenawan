@@ -133,7 +133,7 @@ export default function ({ navigation }) {
                                 fontSize: windowWidth / 25,
                                 color: colors.black,
 
-                            }}>{item.tgl_mulai}</Text>
+                            }}>{IndonesiaTgl(item.tgl_mulai)}</Text>
 
                             <Text style={{
                                 fontFamily: fonts.secondary[600],
@@ -146,7 +146,7 @@ export default function ({ navigation }) {
                                 fontSize: windowWidth / 25,
                                 color: colors.black,
 
-                            }}>{item.tgl_selesai}</Text>
+                            }}>{IndonesiaTgl(item.tgl_selesai)}</Text>
                         </View>
                     )
                 })}

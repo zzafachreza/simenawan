@@ -304,7 +304,7 @@ export default function Home({ navigation }) {
 
 
 
-        <TouchableOpacity onPress={() => navigation.navigate('MenuProfileEdit')} style={{ width: 80, justifyContent: 'center', alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => navigation.navigate('MenuProfileEdit', user)} style={{ width: 80, justifyContent: 'center', alignItems: 'center' }}>
           <Icon type="ionicon" name="person" color={colors.tertiary} />
           <Text style={{
             fontFamily: fonts.secondary[400],

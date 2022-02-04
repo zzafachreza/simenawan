@@ -17,6 +17,7 @@ import {
   MenuPengalamanEdit,
   MenuPelatihan,
   MenuPelatihanEdit,
+  MenuProfileEdit,
 } from '../pages';
 import { colors } from '../utils';
 
@@ -194,6 +195,19 @@ export default function Router() {
         options={{
           headerShown: true,
           headerTitle: 'Pelatihan Edit',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuProfileEdit"
+        component={MenuProfileEdit}
+        options={{
+          headerShown: true,
+          headerTitle: 'Profile Edit',
           headerStyle: {
             backgroundColor: colors.primary,
           },
