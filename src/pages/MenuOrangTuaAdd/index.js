@@ -7,7 +7,9 @@ import axios from 'axios';
 
 export default function ({ navigation, route }) {
 
-    const [kirim, setKirim] = useState(route.params);
+    const [kirim, setKirim] = useState({
+        id_karyawan: route.params.id_karyawan
+    });
     const [loading, setLoading] = useState(false);
 
     console.log('detail edit ortu', route.params)
@@ -18,8 +20,10 @@ export default function ({ navigation, route }) {
         setLoading(true)
         console.error(kirim);
 
-        axios.post('https://simenawan.mpssukorejo.com/api/orang_tua_update.php', kirim).then(res => {
+        axios.post('https://simenawan.mpssukorejo.com/api/orang_tua_add.php', kirim).then(res => {
             setLoading(false);
+
+            console.log(res.data)
 
             navigation.goBack();
         })
@@ -38,7 +42,7 @@ export default function ({ navigation, route }) {
                     ...kirim,
                     tmp_lahirayah: val
                 })} />
-                <DatePicker title="Tanggal Lahir Ayah" mode="date" date={new Date(kirim.tgl_lahirayah)} onDateChange={val => setKirim({
+                <DatePicker title="Tanggal Lahir Ayah" mode="date" date={kirim.tgl_lahirayah == null ? new Date() : new Date(kirim.tgl_lahirayah)} onDateChange={val => setKirim({
                     ...kirim,
                     tgl_lahirayah: val
                 })} />
@@ -61,7 +65,7 @@ export default function ({ navigation, route }) {
                     ...kirim,
                     tmp_lahiribu: val
                 })} />
-                <DatePicker title="Tanggal Lahir Ibu" mode="date" date={new Date(kirim.tgl_lahiribu)} onDateChange={val => setKirim({
+                <DatePicker title="Tanggal Lahir Ibu" mode="date" date={kirim.tgl_lahiribu == null ? new Date() : new Date(kirim.tgl_lahiribu)} onDateChange={val => setKirim({
                     ...kirim,
                     tgl_lahiribu: val
                 })} />

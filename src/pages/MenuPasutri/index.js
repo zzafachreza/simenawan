@@ -34,6 +34,17 @@ export default function ({ navigation }) {
         })
     }
 
+    const hapus = (id) => {
+        // alert(id);
+
+        axios.post('https://simenawan.mpssukorejo.com/api/pasutri_delete.php', {
+            id: id
+        }).then(r => {
+            console.error(r.data)
+            getDataAPI();
+        })
+    }
+
 
 
     useEffect(() => {
@@ -64,16 +75,24 @@ export default function ({ navigation }) {
     return (
         <SafeAreaView>
             <ScrollView>
-                <View style={{ padding: 10, backgroundColor: colors.primary }}>
+                <View style={{ padding: 10, alignItems: 'center', backgroundColor: colors.primary, flexDirection: 'row' }}>
                     <Text
                         style={{
+                            flex: 2,
                             fontFamily: fonts.secondary[600],
                             fontSize: windowWidth / 15,
                             color: colors.white,
                             marginBottom: 10,
                         }}
                     >Data Suami / Istri</Text>
+                    <View style={{
 
+                        flex: 1
+                    }}>
+                        <MyButton onPress={() => navigation.navigate('MenuPasutriAdd', {
+                            id_karyawan: user.id_karyawan
+                        })} title="TAMBAH" warna={colors.white} colorText={colors.primary} iconColor={colors.primary} Icons="add" />
+                    </View>
                 </View>
 
                 {!isData && (
@@ -87,9 +106,7 @@ export default function ({ navigation }) {
                 {isData && data.map(item => {
                     return (
                         <View style={{ margin: 5, padding: 10 }}>
-                            <View style={{ paddingVertical: 10 }}>
-                                <MyButton onPress={() => navigation.navigate('MenuPasutriEdit', item)} title="Ubah Data" Icons="create-outline" warna={colors.secondary} />
-                            </View>
+
                             <Text style={{
                                 fontFamily: fonts.secondary[600],
                                 fontSize: windowWidth / 25,
@@ -133,6 +150,22 @@ export default function ({ navigation }) {
                                 color: colors.black,
 
                             }}>{item.pend}</Text>
+                            <View style={{ paddingVertical: 10, flexDirection: 'row' }}>
+                                <TouchableOpacity onPress={() => navigation.navigate('MenuPasutriEdit', item)} style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.primary, padding: 20, marginRight: 5 }}>
+                                    <Text style={{
+                                        fontFamily: fonts.secondary[600],
+                                        fontSize: windowWidth / 25,
+                                        color: colors.white,
+                                    }}  >EDIT</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => hapus(item.id)} style={{ flex: 1, backgroundColor: colors.secondary, padding: 20, marginLeft: 5, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={{
+                                        fontFamily: fonts.secondary[600],
+                                        fontSize: windowWidth / 25,
+                                        color: colors.white,
+                                    }}>HAPUS</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     )
                 })}

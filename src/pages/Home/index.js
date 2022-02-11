@@ -85,6 +85,50 @@ export default function Home({ navigation }) {
     return `${_tanggal} ${bulan[_bulan]} ${_tahun}`
   }
 
+  const GetUmur = (tgl) => {
+    var today = new Date();
+    var birthday = new Date(tgl);
+    var year = 0;
+    if (today.getMonth() < birthday.getMonth()) {
+      year = 1;
+    } else if ((today.getMonth() == birthday.getMonth()) && today.getDate() < birthday.getDate()) {
+      year = 1;
+    }
+    var age = today.getFullYear() - birthday.getFullYear() - year;
+
+    if (age < 0) {
+      age = 0;
+    }
+
+    return age;
+  }
+
+  const GetPensiun = (tgl) => {
+    var today = new Date();
+    var birthday = new Date(tgl);
+    var year = 0;
+    if (today.getMonth() < birthday.getMonth()) {
+      year = 1;
+    } else if ((today.getMonth() == birthday.getMonth()) && today.getDate() < birthday.getDate()) {
+      year = 1;
+    }
+    var age = today.getFullYear() - birthday.getFullYear() - year;
+    var pensiun = '';
+
+    if (age < 0) {
+      age = 0;
+    }
+
+
+    if (age > 56) {
+      pensiun = 'Anda Sudah Pensiun';
+    } else {
+      pensiun = (56 - age);
+    }
+
+    return pensiun;
+  }
+
 
   const MyTable = ({ label, value }) => {
     return (
@@ -132,11 +176,17 @@ export default function Home({ navigation }) {
                 fontFamily: fonts.secondary[400],
                 fontSize: windowWidth / 25,
                 color: colors.black
-              }}>Selamat datang <Text style={{
-                fontFamily: fonts.secondary[600],
-                fontSize: windowWidth / 25,
-                color: colors.black
-              }}>{user.nama}</Text> </Text>
+              }}>Selamat datang {' '}
+
+                <Text style={{
+                  fontFamily: fonts.secondary[600],
+                  fontSize: windowWidth / 25,
+                  color: colors.black,
+
+                }}>{user.nama}</Text>
+
+
+              </Text>
             </View>
             <View>
               <Image source={{
@@ -152,7 +202,7 @@ export default function Home({ navigation }) {
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: windowWidth / 4, backgroundColor: colors.primary }}>
             <TouchableOpacity onPress={() => navigation.navigate('MenuOrangTua')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
-                <Image source={require('../../assets/logo.png')} style={{
+                <Image source={require('../../assets/ortu.png')} style={{
                   width: 40,
                   height: 40,
                   alignSelf: 'center'
@@ -169,7 +219,7 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('MenuPasutri')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
-                <Image source={require('../../assets/logo.png')} style={{
+                <Image source={require('../../assets/pasutri.png')} style={{
                   width: 40,
                   height: 40,
                   alignSelf: 'center'
@@ -186,7 +236,7 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('MenuAnak')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
-                <Image source={require('../../assets/logo.png')} style={{
+                <Image source={require('../../assets/Anak.png')} style={{
                   width: 40,
                   height: 40,
                   alignSelf: 'center'
@@ -206,7 +256,7 @@ export default function Home({ navigation }) {
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', height: windowWidth / 4, backgroundColor: colors.primary }}>
             <TouchableOpacity onPress={() => navigation.navigate('MenuPendidikan')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
-                <Image source={require('../../assets/logo.png')} style={{
+                <Image source={require('../../assets/pendidikan.png')} style={{
                   width: 40,
                   height: 40,
                   alignSelf: 'center'
@@ -223,7 +273,7 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('MenuPengalaman')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
-                <Image source={require('../../assets/logo.png')} style={{
+                <Image source={require('../../assets/pengalaman.png')} style={{
                   width: 40,
                   height: 40,
                   alignSelf: 'center'
@@ -240,7 +290,7 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('MenuPelatihan')} style={{ justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ width: 60, height: 60, overflow: 'hidden', height: 60, backgroundColor: colors.white, borderRadius: 40, justifyContent: 'center', alignContent: 'center' }}>
-                <Image source={require('../../assets/logo.png')} style={{
+                <Image source={require('../../assets/pelatihan.png')} style={{
                   width: 40,
                   height: 40,
                   alignSelf: 'center'
@@ -272,7 +322,7 @@ export default function Home({ navigation }) {
           <MyTable label="Jabatan" value={user.jab} />
           <MyTable label="Bagian" value={user.dept} />
           <MyTable label="Tempat Tanggal Lahir" value={`${user.tmp_lahir}, ${IndonesiaTgl(user.tgl_lahir)}`} />
-          <MyTable label="Umur" value={user.nik} />
+          <MyTable label="Umur" value={`${GetUmur(user.tgl_lahir)} Tahun`} />
           <MyTable label="Golongan Darah" value={user.gol_darah} />
           <MyTable label="Agama" value={user.agama} />
           <MyTable label="Status" value={user.status} />
@@ -280,8 +330,8 @@ export default function Home({ navigation }) {
           <MyTable label="Email" value={user.email} />
 
           <MyTable label="Alamat" value={user.alamat} />
-          <MyTable label="Upah" value={new Intl.NumberFormat().format(user.gaji)} />
-          <MyTable label="Pensiun" value={user.nik} />
+          {/* <MyTable label="Upah" value={new Intl.NumberFormat().format(user.gaji)} /> */}
+          <MyTable label="Pensiun" value={`Masa Kerja Kurang ${GetPensiun(user.tgl_lahir)} Tahun`} />
 
 
 

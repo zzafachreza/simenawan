@@ -7,7 +7,7 @@ import {
   Image,
   Animated,
 } from 'react-native';
-import { colors } from '../../utils';
+import { colors, windowWidth } from '../../utils';
 import { getData } from '../../utils/localStorage';
 
 export default function Splash({ navigation }) {
@@ -63,16 +63,16 @@ export default function Splash({ navigation }) {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Animated.Image
-        source={require('../../assets/logo.png')}
+      <Image
+        source={require('../../assets/logo_awal.png')}
         style={
-          ({
-            width: 300,
-            height: 220,
-          },
           {
-            transform: [{ scale: top }],
-          })
+            width: windowWidth,
+            height: 280,
+            aspectRatio: 1,
+            resizeMode: "contain"
+          }
+
         }
       />
     </View>

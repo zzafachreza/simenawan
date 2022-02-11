@@ -18,8 +18,14 @@ import {
   MenuPelatihan,
   MenuPelatihanEdit,
   MenuProfileEdit,
+  MenuOrangTuaAdd,
+  MenuAnakAdd,
+  MenuPasutriAdd,
+  MenuPendidikanAdd,
+  MenuPelatihanAdd,
 } from '../pages';
 import { colors } from '../utils';
+import MenuPengalamanAdd from '../pages/MenuPengalamanAdd';
 
 const Stack = createStackNavigator();
 
@@ -80,6 +86,19 @@ export default function Router() {
         }}
       />
 
+      <Stack.Screen
+        name="MenuOrangTuaAdd"
+        component={MenuOrangTuaAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Orang Tua Tambah',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
 
       <Stack.Screen
         name="MenuAnak"
@@ -107,6 +126,20 @@ export default function Router() {
         }}
       />
 
+      <Stack.Screen
+        name="MenuAnakAdd"
+        component={MenuAnakAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Anak Tambah',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+
 
       <Stack.Screen
         name="MenuPasutri"
@@ -128,6 +161,19 @@ export default function Router() {
         options={{
           headerShown: true,
           headerTitle: 'Suami / Istri Edit',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuPasutriAdd"
+        component={MenuPasutriAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Suami / Istri Tambah',
           headerStyle: {
             backgroundColor: colors.primary,
           },
@@ -162,6 +208,19 @@ export default function Router() {
       />
 
       <Stack.Screen
+        name="MenuPendidikanAdd"
+        component={MenuPendidikanAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Pendidikan Tambah',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
         name="MenuPengalaman"
         component={MenuPengalaman}
         options={{
@@ -180,6 +239,19 @@ export default function Router() {
         options={{
           headerShown: true,
           headerTitle: 'Pengalaman Edit',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuPengalamanAdd"
+        component={MenuPengalamanAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Pengalaman Tambah',
           headerStyle: {
             backgroundColor: colors.primary,
           },
@@ -207,6 +279,19 @@ export default function Router() {
         options={{
           headerShown: true,
           headerTitle: 'Pelatihan Edit',
+          headerStyle: {
+            backgroundColor: colors.primary,
+          },
+          headerTintColor: '#fff',
+        }}
+      />
+
+      <Stack.Screen
+        name="MenuPelatihanAdd"
+        component={MenuPelatihanAdd}
+        options={{
+          headerShown: true,
+          headerTitle: 'Pelatihan Tambah',
           headerStyle: {
             backgroundColor: colors.primary,
           },

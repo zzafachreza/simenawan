@@ -154,11 +154,11 @@ export default function ({ navigation, route }) {
                     ...kirim,
                     alamat: val
                 })} />
-
+                {/* 
                 <MyInput label="Gaji" value={kirim.gaji} onChangeText={val => setKirim({
                     ...kirim,
                     gaji: val
-                })} />
+                })} /> */}
 
                 <MyInput label="Password Jika Akan diganti" value={kirim.newpassword} onChangeText={val => setKirim({
                     ...kirim,
