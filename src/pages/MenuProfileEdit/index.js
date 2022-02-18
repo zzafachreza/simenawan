@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, ActivityIndicator, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { MyButton, MyInput } from '../../components';
 import DatePicker from 'react-native-date-picker';
@@ -6,9 +6,123 @@ import { colors, fonts } from '../../utils';
 import axios from 'axios';
 import { getData, storeData } from '../../utils/localStorage';
 import { Picker } from '@react-native-picker/picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 export default function ({ navigation, route }) {
 
+
+    const options = {
+        includeBase64: true,
+        quality: 0.5,
+        maxWidth: 1000,
+        maxHeight: 1000,
+    };
+
+    const getCamera = xyz => {
+        launchCamera(options, response => {
+            console.log('Response = ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('Image Picker Error: ', response.error);
+            } else {
+                let source = { uri: response.uri };
+                switch (xyz) {
+                    case 1:
+                        setKirim({
+                            ...kirim,
+                            newfoto: `data:${response.type};base64, ${response.base64}`,
+                        });
+                        setfoto(`data:${response.type};base64, ${response.base64}`);
+                        break;
+                }
+            }
+        });
+    };
+
+    const getGallery = xyz => {
+        launchImageLibrary(options, response => {
+            console.log('Response = ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('Image Picker Error: ', response.error);
+            } else {
+                let source = { uri: response.uri };
+                switch (xyz) {
+                    case 1:
+                        setKirim({
+                            ...kirim,
+                            newfoto: `data:${response.type};base64, ${response.base64}`,
+                        });
+                        setfoto(`data:${response.type};base64, ${response.base64}`);
+                        break;
+                }
+            }
+        });
+    };
+
+    const UploadFoto = ({ onPress1, onPress2, label, foto }) => {
+        return (
+            <View
+                style={{
+                    padding: 10,
+                    backgroundColor: colors.white,
+                    marginVertical: 10,
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    borderColor: colors.border,
+                    elevation: 2,
+                }}>
+                <Text
+                    style={{
+                        fontFamily: fonts.secondary[600],
+                        color: colors.black,
+                    }}>
+                    {label}
+                </Text>
+                <Image
+                    source={{
+                        uri: foto,
+                    }}
+                    style={{
+                        width: '100%',
+                        aspectRatio: 2,
+                        resizeMode: 'contain',
+                    }}
+                />
+                <View
+                    style={{
+                        flexDirection: 'row',
+                    }}>
+                    <View
+                        style={{
+                            flex: 1,
+                            paddingRight: 5,
+                        }}>
+                        <MyButton
+                            onPress={onPress1}
+                            colorText={colors.white}
+                            title="KAMERA"
+                            warna={colors.primary}
+                        />
+                    </View>
+                    <View
+                        style={{
+                            flex: 1,
+                            paddingLeft: 5,
+                        }}>
+                        <MyButton
+                            onPress={onPress2}
+                            title="GALLERY"
+                            colorText={colors.white}
+                            warna={colors.secondary}
+                        />
+                    </View>
+                </View>
+            </View>
+        );
+    };
 
 
 
@@ -40,9 +154,11 @@ export default function ({ navigation, route }) {
     //         setKirim(res);
     //     })
 
-    // }, [])
+    // }, []);
 
 
+
+    const [foto, setfoto] = useState('https://simenawan.mpssukorejo.com/assets/images/foto/' + kirim.foto);
 
 
     return (
@@ -50,6 +166,15 @@ export default function ({ navigation, route }) {
             <View style={{
                 padding: 10
             }}>
+
+                <UploadFoto
+                    onPress1={() => getCamera(1)}
+                    onPress2={() => getGallery(1)}
+                    label="Upload Foto Profile"
+                    foto={foto}
+                />
+
+
                 <MyInput label="nama" value={kirim.nama} onChangeText={val => setKirim({
                     ...kirim,
                     nama: val

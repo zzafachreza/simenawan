@@ -69,25 +69,10 @@ export default function ({ navigation }) {
     <ScrollView style={{ padding: 10, flex: 1 }}>
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <Image
-          source={require('../../assets/logo.png')}
-          style={{ width: 100, height: 100 }}
+          source={require('../../assets/logo_awal.png')}
+          style={{ aspectRatio: 1, resizeMode: 'contain', height: 250 }}
         />
-        <Text
-          style={{
-            fontFamily: fonts.secondary[600],
-            fontSize: windowWidth / 10,
-            color: colors.black,
-          }}>
-          SIMENAWAN
-        </Text>
-        <Text
-          style={{
-            fontFamily: fonts.secondary[400],
-            fontSize: windowWidth / 30,
-            color: colors.black,
-          }}>
-          Sistem Informasi Manajemen Karyawan
-        </Text>
+
       </View>
       <MyGap jarak={40} />
       <View style={{ padding: 10, marginVertical: 10, flex: 1 }}>

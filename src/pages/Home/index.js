@@ -56,16 +56,39 @@ const DataKategori = ({ icon, nama, onPress, img = require('../../assets/hospita
 export default function Home({ navigation }) {
 
   const [user, setUser] = useState({});
-
+  const [foto, setfoto] = useState('');
 
 
   useEffect(() => {
 
     getData('user').then(res => {
       setUser(res);
+
+      if (res.jk == 'L' && res.foto == '') {
+        setUser({
+          ...res,
+          foto: 'https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-male.png'
+        });
+      } else if (res.jk == 'P' && res.foto == '') {
+        setUser({
+          ...res,
+          foto: 'https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-famale.png'
+        });
+      } else if (user.foto.toString().substring(0, 10) == 'data:image') {
+        setUser({
+          ...res,
+          foto: user.foto
+        });
+      } else if (user.foto.toString().substring(0, 10) != 'data:image') {
+        setUser({
+          ...res,
+          foto: 'https://simenawan.mpssukorejo.com/assets/images/foto/' + user.foto
+        });
+      }
+
     })
 
-  })
+  }, [])
 
 
 
@@ -163,15 +186,16 @@ export default function Home({ navigation }) {
           <View style={{ flexDirection: 'row', padding: 10 }}>
             <View style={{ flex: 1, }}>
               <Image
-                source={require('../../assets/logo.png')}
-                style={{ width: 60, height: 60 }}
+                source={require('../../assets/logo_awal.png')}
+                style={{ height: 100, resizeMode: 'contain', aspectRatio: 1 }}
               />
+
               <Text style={{
-                fontFamily: fonts.secondary[800],
+                fontFamily: fonts.secondary[600],
                 fontSize: windowWidth / 20,
                 color: colors.black,
                 marginBottom: 10,
-              }}>SIMENAWAN</Text>
+              }}>MPS Sukorejo</Text>
               <Text style={{
                 fontFamily: fonts.secondary[400],
                 fontSize: windowWidth / 25,
@@ -186,13 +210,15 @@ export default function Home({ navigation }) {
                 }}>{user.nama}</Text>
 
 
+
               </Text>
             </View>
             <View>
               <Image source={{
-                uri: 'https://simenawan.mpssukorejo.com/assets/images/foto/' + user.foto
+                uri: user.foto
               }}
                 style={{ width: 100, borderRadius: 10, resizeMode: 'contain', aspectRatio: 1 }} />
+
             </View>
 
           </View>
