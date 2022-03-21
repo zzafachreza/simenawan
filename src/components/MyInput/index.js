@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {Icon, ListItem, Button} from 'react-native-elements';
-import {colors} from '../../utils/colors';
-import {fonts} from '../../utils/fonts';
-import {TextInput} from 'react-native-gesture-handler';
+import { StyleSheet, Text, View } from 'react-native';
+import { Icon, ListItem, Button } from 'react-native-elements';
+import { colors } from '../../utils/colors';
+import { fonts } from '../../utils/fonts';
+import { TextInput } from 'react-native-gesture-handler';
 
 export default function MyInput({
   onFocus,
@@ -21,6 +21,7 @@ export default function MyInput({
   label2,
   styleLabel,
   colorIcon = colors.primary,
+  disable = false
 }) {
   return (
     <>
@@ -55,28 +56,39 @@ export default function MyInput({
           {label2}
         </Text>
       )}
-      <TextInput
-        multiline={multiline}
-        autoFocus={autoFocus}
-        onFocus={onFocus}
-        placeholder={placeholder}
-        secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
-        value={value}
-        onChangeText={onChangeText}
-        autoCapitalize="none"
-        style={{
-          borderColor: colors.border,
-          // borderRadius: 10,
-          height: tinggi,
-          borderBottomWidth: 1,
-          paddingLeft: 10,
-          color: colors.black,
+
+      {!disable &&
+        <TextInput
+          multiline={multiline}
+          autoFocus={autoFocus}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          secureTextEntry={secureTextEntry}
+          keyboardType={keyboardType}
+          value={value}
+          onChangeText={onChangeText}
+          autoCapitalize="none"
+          style={{
+            borderColor: colors.border,
+            // borderRadius: 10,
+            height: tinggi,
+            borderBottomWidth: 1,
+            paddingLeft: 10,
+            color: colors.black,
+            fontSize: 15,
+            fontFamily: fonts.primary[400],
+            ...styleInput,
+          }}
+        />}
+      {disable && <View style={{
+        padding: 10,
+        backgroundColor: '#E1E1E1'
+      }}>
+        <Text style={{
           fontSize: 15,
           fontFamily: fonts.primary[400],
-          ...styleInput,
-        }}
-      />
+        }}>{value}</Text>
+      </View>}
     </>
   );
 }

@@ -17,6 +17,7 @@ import RNExitApp from 'react-native-exit-app';
 import { getData, storeData } from '../../utils/localStorage';
 import { color } from 'react-native-elements/dist/helpers';
 import 'intl';
+import { useIsFocused } from "@react-navigation/native";
 import 'intl/locale-data/jsonp/en';
 
 const DataKategori = ({ icon, nama, onPress, img = require('../../assets/hospital.png') }) => {
@@ -57,38 +58,35 @@ export default function Home({ navigation }) {
 
   const [user, setUser] = useState({});
   const [foto, setfoto] = useState('');
-
+  const isFocused = useIsFocused();
 
   useEffect(() => {
 
-    getData('user').then(res => {
-      setUser(res);
 
-      if (res.jk == 'L' && res.foto == '') {
-        setUser({
-          ...res,
-          foto: 'https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-male.png'
-        });
-      } else if (res.jk == 'P' && res.foto == '') {
-        setUser({
-          ...res,
-          foto: 'https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-famale.png'
-        });
-      } else if (user.foto.toString().substring(0, 10) == 'data:image') {
-        setUser({
-          ...res,
-          foto: user.foto
-        });
-      } else if (user.foto.toString().substring(0, 10) != 'data:image') {
-        setUser({
-          ...res,
-          foto: 'https://simenawan.mpssukorejo.com/assets/images/foto/' + user.foto
-        });
-      }
+    if (isFocused) {
 
-    })
 
-  }, [])
+
+      getData('user').then(res => {
+        setUser(res);
+
+        if (res.jk == 'L' && res.foto == '') {
+          setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-male.png');
+        } else if (res.jk == 'P' && res.foto == '') {
+          setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-female.png');
+
+
+        } else if (res.foto.toString().substring(0, 10) != 'data:image') {
+          setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/' + res.foto)
+
+        } else if (res.foto.toString().substring(0, 10) == 'data:image') {
+          setfoto(res.foto)
+        }
+
+      })
+    }
+
+  }, [isFocused])
 
 
 
@@ -215,7 +213,7 @@ export default function Home({ navigation }) {
             </View>
             <View>
               <Image source={{
-                uri: user.foto
+                uri: foto
               }}
                 style={{ width: 100, borderRadius: 10, resizeMode: 'contain', aspectRatio: 1 }} />
 
@@ -337,11 +335,28 @@ export default function Home({ navigation }) {
 
           {/* menu */}
 
-          <MyTable label="nama" value={user.nama} />
+          <MyTable label="Nama" value={user.nama} />
+          <View style={{
+            padding: 10,
+            borderBottomWidth: 1,
+            borderBottomColor: colors.border
+          }}>
+            <Text style={{
+              fontFamily: fonts.secondary[600],
+              fontSize: windowWidth / 23,
+              color: colors.black
+            }}>Foto KTP</Text>
+            <Image source={{ uri: user.foto_ktp }} style={{
+              width: '100%',
+              resizeMode: 'contain',
+              // height: 300,
+              aspectRatio: 1,
+            }} />
+          </View>
           <MyTable label="NIK" value={user.nik} />
-          <MyTable label="Noka JHT" value={user.nokajht} />
+          <MyTable label="BPJS Ketenagakerjaan" value={user.nokajht} />
 
-          <MyTable label="BP Jamsostek" value={user.nokakes} />
+          <MyTable label="BPJS Kesehatan" value={user.nokakes} />
           <MyTable label="NPWP" value={user.npwp} />
           <MyTable label="ID Resmi" value={user.idresmi} />
           <MyTable label="Jenis Kelamin" value={user.jk == "P" ? "Perempuan" : "Laki-laki"} />

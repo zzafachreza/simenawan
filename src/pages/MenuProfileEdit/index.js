@@ -40,6 +40,28 @@ export default function ({ navigation, route }) {
         });
     };
 
+
+    const getCamera2 = xyz => {
+        launchCamera(options, response => {
+            console.log('Response = ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('Image Picker Error: ', response.error);
+            } else {
+                let source = { uri: response.uri };
+                switch (xyz) {
+                    case 1:
+                        setKirim({
+                            ...kirim,
+                            foto_ktp: `data:${response.type};base64, ${response.base64}`,
+                        });
+                        break;
+                }
+            }
+        });
+    };
+
     const getGallery = xyz => {
         launchImageLibrary(options, response => {
             console.log('Response = ', response);
@@ -56,6 +78,29 @@ export default function ({ navigation, route }) {
                             newfoto: `data:${response.type};base64, ${response.base64}`,
                         });
                         setfoto(`data:${response.type};base64, ${response.base64}`);
+                        break;
+                }
+            }
+        });
+    };
+
+
+    const getGallery2 = xyz => {
+        launchImageLibrary(options, response => {
+            console.log('Response = ', response);
+            if (response.didCancel) {
+                console.log('User cancelled image picker');
+            } else if (response.error) {
+                console.log('Image Picker Error: ', response.error);
+            } else {
+                let source = { uri: response.uri };
+                switch (xyz) {
+                    case 1:
+                        setKirim({
+                            ...kirim,
+                            foto_ktp: `data:${response.type};base64, ${response.base64}`,
+                        });
+
                         break;
                 }
             }
@@ -148,17 +193,26 @@ export default function ({ navigation, route }) {
     }
 
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    //     getData('user').then(res => {
-    //         setKirim(res);
-    //     })
-
-    // }, []);
-
+        if (route.params.jk == 'L' && route.params.foto == '') {
+            setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-male.png');
+        } else if (route.params.jk == 'P' && route.params.foto == '') {
+            setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-famale.png');
 
 
-    const [foto, setfoto] = useState('https://simenawan.mpssukorejo.com/assets/images/foto/' + kirim.foto);
+        } else if (route.params.foto.toString().substring(0, 10) != 'data:image') {
+            setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/' + route.params.foto)
+
+        } else if (route.params.foto.toString().substring(0, 10) == 'data:image') {
+            setfoto(route.params.foto)
+        }
+    }, []);
+
+
+
+
+    const [foto, setfoto] = useState('');
 
 
     return (
@@ -175,32 +229,39 @@ export default function ({ navigation, route }) {
                 />
 
 
-                <MyInput label="nama" value={kirim.nama} onChangeText={val => setKirim({
+                <MyInput label="Nama" value={kirim.nama} onChangeText={val => setKirim({
                     ...kirim,
                     nama: val
                 })} />
 
-                <MyInput label="idresmi" value={kirim.idresmi} onChangeText={val => setKirim({
+                <MyInput disable label="idresmi" value={kirim.idresmi} onChangeText={val => setKirim({
                     ...kirim,
                     idresmi: val
                 })} />
 
-                <MyInput label="nokajht" value={kirim.nokajht} onChangeText={val => setKirim({
+                <MyInput disable label="BPJS Ketenagakerjaan" value={kirim.nokajht} onChangeText={val => setKirim({
                     ...kirim,
                     nokajht: val
                 })} />
 
-                <MyInput label="nokakes" value={kirim.nokakes} onChangeText={val => setKirim({
+                <MyInput disable label="BPJS Kesehatan" value={kirim.nokakes} onChangeText={val => setKirim({
                     ...kirim,
                     nokakes: val
                 })} />
 
-                <MyInput label="nik" value={kirim.nik} onChangeText={val => setKirim({
+                <MyInput disable label="nik" value={kirim.nik} onChangeText={val => setKirim({
                     ...kirim,
                     nik: val
                 })} />
 
-                <MyInput label="npwp" value={kirim.npwp} onChangeText={val => setKirim({
+                <UploadFoto
+                    onPress1={() => getCamera2(1)}
+                    onPress2={() => getGallery2(1)}
+                    label="Upload Foto KTP"
+                    foto={kirim.foto_ktp}
+                />
+
+                <MyInput disable label="npwp" value={kirim.npwp} onChangeText={val => setKirim({
                     ...kirim,
                     npwp: val
                 })} />
@@ -254,15 +315,47 @@ export default function ({ navigation, route }) {
                     tgl_lahir: val
                 })} />
 
-                <MyInput label="Golongan Darah" value={kirim.gol_darah} onChangeText={val => setKirim({
-                    ...kirim,
-                    gol_darah: val
-                })} />
 
-                <MyInput label="status" value={kirim.status} onChangeText={val => setKirim({
-                    ...kirim,
-                    status: val
-                })} />
+                <Text style={{
+                    marginTop: 10,
+                    left: 10,
+                    fontFamily: fonts.secondary[600],
+                    color: colors.primary,
+                    fontSize: 16,
+
+                }}>Golongan Darah</Text>
+                <Picker
+                    selectedValue={kirim.gol_darah}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setKirim({ ...kirim, gol_darah: itemValue })
+                    }>
+                    <Picker.Item label="A" value="A" />
+                    <Picker.Item label="AB" value="AB" />
+                    <Picker.Item label="B" value="B" />
+                    <Picker.Item label="O" value="O" />
+                </Picker>
+
+
+
+                <Text style={{
+                    marginTop: 10,
+                    left: 10,
+                    fontFamily: fonts.secondary[600],
+                    color: colors.primary,
+                    fontSize: 16,
+
+                }}>Status</Text>
+                <Picker
+                    selectedValue={kirim.status}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setKirim({ ...kirim, status: itemValue })
+                    }>
+                    <Picker.Item label="K0_Belum Menikah" value="K0" />
+                    <Picker.Item label="K1_Menikah dan memiliki anak 1" value="K1" />
+                    <Picker.Item label="K2_Menikah dan memiliki anak 2" value="K2" />
+                    <Picker.Item label="K3_Menikah dan memiliki anak 3" value="K3" />
+                    <Picker.Item label="K4_Lainnya" value="K4" />
+                </Picker>
 
 
                 <MyInput label="Telepon" value={kirim.telp} onChangeText={val => setKirim({

@@ -2,8 +2,9 @@ import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { MyButton, MyInput } from '../../components';
 import DatePicker from 'react-native-date-picker';
-import { colors } from '../../utils';
+import { colors, fonts } from '../../utils';
 import axios from 'axios';
+import { Picker } from '@react-native-picker/picker';
 
 export default function ({ navigation, route }) {
 
@@ -54,10 +55,24 @@ export default function ({ navigation, route }) {
                     status: val
                 })} />
 
-                <MyInput label="Jenis Kelamin" value={kirim.jk} onChangeText={val => setKirim({
-                    ...kirim,
-                    jk: val
-                })} />
+
+                <Text style={{
+                    marginTop: 10,
+                    left: 10,
+                    fontFamily: fonts.secondary[600],
+                    color: colors.primary,
+                    fontSize: 16,
+
+                }}>Jenis Kelamin</Text>
+                <Picker
+                    selectedValue={kirim.jk}
+                    onValueChange={(itemValue, itemIndex) =>
+                        setKirim({ ...kirim, jk: itemValue })
+                    }>
+                    <Picker.Item label="Laki - laki" value="Laki - laki" />
+                    <Picker.Item label="Perempuan" value="Perempuan" />
+
+                </Picker>
 
             </View>
 
