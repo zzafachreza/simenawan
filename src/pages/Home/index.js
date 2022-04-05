@@ -416,10 +416,7 @@ export default function Home({ navigation }) {
               },
               {
                 text: "OK", onPress: () => {
-                  storeData('user', {
-                    nik: null,
-                    password: null
-                  });
+                  storeData('user', null);
 
 
 

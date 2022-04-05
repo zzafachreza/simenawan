@@ -2,7 +2,7 @@ import { View, Text, ScrollView, ActivityIndicator, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { MyButton, MyInput } from '../../components';
 import DatePicker from 'react-native-date-picker';
-import { colors, fonts } from '../../utils';
+import { colors, fonts, windowWidth } from '../../utils';
 import axios from 'axios';
 import { getData, storeData } from '../../utils/localStorage';
 import { Picker } from '@react-native-picker/picker';
@@ -408,6 +408,16 @@ export default function ({ navigation, route }) {
                     <ActivityIndicator size="large" color={colors.primary} />
                 </View>
             )}
+
+            <View style={{ padding: 10 }}>
+
+                <Text style={{
+                    fontFamily: fonts.secondary[400],
+                    fontSize: windowWidth / 25,
+                    color: colors.black,
+
+                }}>Dengan ini kami menyatakan dengan sesungguhnya bahwa semua informasi yang disampaikan dalam seluruh dokumen serta lampiran-lampirannya ini adalah benar dan kesatuan yang tidak dapat dipisahkan. Dan saya bersangkutan memberikan persetujuan pemberian data untuk KUD Suber Rejo</Text>
+            </View>
         </ScrollView >
     );
 }
