@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import { MyButton, MyInput } from '../../components';
+import { MyButton, MyGap, MyInput } from '../../components';
 import DatePicker from 'react-native-date-picker';
 import { colors } from '../../utils';
 import axios from 'axios';
@@ -20,7 +20,7 @@ export default function ({ navigation, route }) {
         setLoading(true)
         console.error(kirim);
 
-        axios.post('https://simenawan.mpssukorejo.com/api/orang_tua_add.php', kirim).then(res => {
+        axios.post('https://mpsskj.com/api/orang_tua_add.php', kirim).then(res => {
             setLoading(false);
 
             console.log(res.data)
@@ -32,12 +32,14 @@ export default function ({ navigation, route }) {
     return (
         <ScrollView>
             <View style={{
-                padding: 10
+                padding: 20,
+
             }}>
                 <MyInput label="Nama Ayah" value={kirim.ayah} onChangeText={val => setKirim({
                     ...kirim,
                     ayah: val
                 })} />
+
                 <MyInput label="Tempat Lahir dan Tanggal Lahir Ayah" value={kirim.tmp_lahirayah} onChangeText={val => setKirim({
                     ...kirim,
                     tmp_lahirayah: val

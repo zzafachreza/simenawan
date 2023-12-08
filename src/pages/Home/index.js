@@ -71,13 +71,13 @@ export default function Home({ navigation }) {
         setUser(res);
 
         if (res.jk == 'L' && res.foto == '') {
-          setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-male.png');
+          setfoto('https://mpsskj.com/assets/images/foto/no-foto-male.png');
         } else if (res.jk == 'P' && res.foto == '') {
-          setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-female.png');
+          setfoto('https://mpsskj.com/assets/images/foto/no-foto-female.png');
 
 
         } else if (res.foto.toString().substring(0, 10) != 'data:image') {
-          setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/' + res.foto)
+          setfoto('https://mpsskj.com/assets/images/foto/' + res.foto)
 
         } else if (res.foto.toString().substring(0, 10) == 'data:image') {
           setfoto(res.foto)

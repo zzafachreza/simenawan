@@ -181,7 +181,7 @@ export default function ({ navigation, route }) {
         setLoading(true);
         console.error(kirim);
 
-        axios.post('https://simenawan.mpssukorejo.com/api/profile_update.php', kirim).then(res => {
+        axios.post('https://mpsskj.com/api/profile_update.php', kirim).then(res => {
             setLoading(false);
 
             console.warn(res.data);
@@ -196,13 +196,13 @@ export default function ({ navigation, route }) {
     useEffect(() => {
 
         if (route.params.jk == 'L' && route.params.foto == '') {
-            setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-male.png');
+            setfoto('https://mpsskj.com/assets/images/foto/no-foto-male.png');
         } else if (route.params.jk == 'P' && route.params.foto == '') {
-            setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/no-foto-famale.png');
+            setfoto('https://mpsskj.com/assets/images/foto/no-foto-famale.png');
 
 
         } else if (route.params.foto.toString().substring(0, 10) != 'data:image') {
-            setfoto('https://simenawan.mpssukorejo.com/assets/images/foto/' + route.params.foto)
+            setfoto('https://mpsskj.com/assets/images/foto/' + route.params.foto)
 
         } else if (route.params.foto.toString().substring(0, 10) == 'data:image') {
             setfoto(route.params.foto)
@@ -358,7 +358,7 @@ export default function ({ navigation, route }) {
                 </Picker>
 
 
-                <MyInput label="Telepon" value={kirim.telp} onChangeText={val => setKirim({
+                <MyInput label="Telepon" keyboardType='phone-pad' value={kirim.telp} onChangeText={val => setKirim({
                     ...kirim,
                     telp: val
                 })} />

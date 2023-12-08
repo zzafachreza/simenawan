@@ -16,7 +16,7 @@ export default function ({ navigation, route }) {
         setLoading(true)
         console.error(kirim);
 
-        axios.post('https://simenawan.mpssukorejo.com/api/pengalaman_update.php', kirim).then(res => {
+        axios.post('https://mpsskj.com/api/pengalaman_update.php', kirim).then(res => {
             setLoading(false);
 
             console.warn(res.data);

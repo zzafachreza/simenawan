@@ -34,7 +34,7 @@ export default function ({ navigation }) {
 
       console.log(kirim);
 
-      axios.post('https://simenawan.mpssukorejo.com/api/login.php', kirim).then(res => {
+      axios.post('https://mpsskj.com/api/login.php', kirim).then(res => {
         console.log(res.data);
 
         if (res.data.kode === 50) {
@@ -76,13 +76,13 @@ export default function ({ navigation }) {
       </View>
       <MyGap jarak={40} />
       <View style={{ padding: 10, marginVertical: 10, flex: 1 }}>
-        <MyInput label="NIK" onChangeText={val => setKirim({
+        <MyInput keyboardType='number-pad' label="NIK" onChangeText={val => setKirim({
           ...kirim,
           nik: val
         })}
 
 
-          iconname="card" placeholder="Masukan NIK Anda" />
+          iconname="card" placeholder="Masukan NIK Anda" maxLength={16} />
         <MyGap jarak={20} />
         <MyInput
           onChangeText={val => setKirim({

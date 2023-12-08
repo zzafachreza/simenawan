@@ -11,6 +11,7 @@ export default function MyInput({
   iconname,
   onChangeText,
   value,
+  maxLength,
   keyboardType,
   secureTextEntry,
   styleInput,
@@ -27,8 +28,10 @@ export default function MyInput({
     <>
       <View
         style={{
+          marginVertical: 15,
           flexDirection: 'row',
           alignItems: 'center',
+
           paddingVertical: 5,
         }}>
         <Icon type="ionicon" name={iconname} color={colorIcon} size={16} />
@@ -59,6 +62,7 @@ export default function MyInput({
 
       {!disable &&
         <TextInput
+          maxLength={maxLength}
           multiline={multiline}
           autoFocus={autoFocus}
           onFocus={onFocus}
@@ -70,9 +74,11 @@ export default function MyInput({
           autoCapitalize="none"
           style={{
             borderColor: colors.border,
-            // borderRadius: 10,
+            borderRadius: 10,
+            backgroundColor: colors.white,
             height: tinggi,
-            borderBottomWidth: 1,
+            // borderBottomWidth: 1,
+            borderWidth: 1,
             paddingLeft: 10,
             color: colors.black,
             fontSize: 15,

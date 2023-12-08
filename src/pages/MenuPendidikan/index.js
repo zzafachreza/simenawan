@@ -22,7 +22,7 @@ export default function ({ navigation }) {
         getData('user').then(res => {
             setUser(res);
 
-            axios.post('https://simenawan.mpssukorejo.com/api/pendidikan_data.php', {
+            axios.post('https://mpsskj.com/api/pendidikan_data.php', {
                 id_karyawan: res.id_karyawan
             }).then(r => {
 
@@ -38,7 +38,7 @@ export default function ({ navigation }) {
     const hapus = (id) => {
         // alert(id);
 
-        axios.post('https://simenawan.mpssukorejo.com/api/pendidikan_delete.php', {
+        axios.post('https://mpsskj.com/api/pendidikan_delete.php', {
             id: id
         }).then(r => {
             console.error(r.data)
